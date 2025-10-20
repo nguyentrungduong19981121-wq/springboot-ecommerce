@@ -1,12 +1,30 @@
--- Sample data for testing Admin Dashboard
+-- Sample data for testing Admin Dashboard and Product Management
 
--- Insert sample products
-INSERT INTO product (id, name, price, picture_url) VALUES
-(1, 'Laptop Dell XPS 13', 30000.0, 'https://example.com/laptop.jpg'),
-(2, 'iPhone 13 Pro', 25000.0, 'https://example.com/iphone.jpg'),
-(3, 'Samsung Galaxy S21', 20000.0, 'https://example.com/samsung.jpg'),
-(4, 'MacBook Pro 14', 45000.0, 'https://example.com/macbook.jpg'),
-(5, 'iPad Air', 15000.0, 'https://example.com/ipad.jpg');
+-- Insert sample categories
+INSERT INTO categories (id, name, description) VALUES
+(1, 'Laptops', 'High-performance laptops and notebooks'),
+(2, 'Smartphones', 'Latest smartphones and mobile devices'),
+(3, 'Tablets', 'Tablets and iPad devices'),
+(4, 'Accessories', 'Phone and laptop accessories');
+
+-- Insert sample products with new fields
+INSERT INTO product (id, name, slug, description, price, stock, picture_url, category_id) VALUES
+(1, 'Laptop Dell XPS 13', 'laptop-dell-xps-13', 'Ultra-thin and powerful laptop with 13-inch display, Intel Core i7, 16GB RAM', 30000.0, 10, 'https://example.com/laptop.jpg', 1),
+(2, 'iPhone 13 Pro', 'iphone-13-pro', 'Latest iPhone with A15 Bionic chip, Pro camera system, and Super Retina XDR display', 25000.0, 25, 'https://example.com/iphone.jpg', 2),
+(3, 'Samsung Galaxy S21', 'samsung-galaxy-s21', 'Premium Android smartphone with 5G capability and professional-grade camera', 20000.0, 20, 'https://example.com/samsung.jpg', 2),
+(4, 'MacBook Pro 14', 'macbook-pro-14', 'Apple MacBook Pro with M1 Pro chip, 14-inch Liquid Retina XDR display', 45000.0, 8, 'https://example.com/macbook.jpg', 1),
+(5, 'iPad Air', 'ipad-air', 'Powerful and colorful iPad Air with M1 chip and 10.9-inch display', 15000.0, 15, 'https://example.com/ipad.jpg', 3);
+
+-- Insert sample product images
+INSERT INTO product_images (id, url, product_id) VALUES
+(1, 'https://example.com/laptop-front.jpg', 1),
+(2, 'https://example.com/laptop-side.jpg', 1),
+(3, 'https://example.com/iphone-gold.jpg', 2),
+(4, 'https://example.com/iphone-silver.jpg', 2),
+(5, 'https://example.com/samsung-black.jpg', 3),
+(6, 'https://example.com/macbook-space-gray.jpg', 4),
+(7, 'https://example.com/ipad-blue.jpg', 5),
+(8, 'https://example.com/ipad-pink.jpg', 5);
 
 -- Insert sample customers
 INSERT INTO customers (id, name, email, phone, registered_date) VALUES
