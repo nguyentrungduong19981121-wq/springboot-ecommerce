@@ -6,6 +6,7 @@ import {ProductOrder} from "../models/product-order.model";
 
 @Component({
   selector: 'app-shopping-cart',
+  standalone: false,
   templateUrl: './shopping-cart.component.html',
   styleUrls: ['./shopping-cart.component.css']
 })

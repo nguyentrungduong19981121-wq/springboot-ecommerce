@@ -5,6 +5,7 @@ import {OrdersComponent} from "./orders/orders.component";
 
 @Component({
   selector: 'app-ecommerce',
+  standalone: false,
   templateUrl: './ecommerce.component.html',
   styleUrls: ['./ecommerce.component.css']
 })
@@ -23,7 +24,7 @@ export class EcommerceComponent implements OnInit {
   shoppingCartC: ShoppingCartComponent;
   @ViewChild('ordersC')
   ordersC: OrdersComponent;
-  private collapsed = true;
+  collapsed = true;
 
   toggleCollapsed(): void {
     this.collapsed = !this.collapsed;

@@ -12,9 +12,9 @@ export class EcommerceService {
   private productOrder: ProductOrder;
   private orders: ProductOrders = new ProductOrders();
 
-  private productOrderSubject = new Subject();
-  private ordersSubject = new Subject();
-  private totalSubject = new Subject();
+  private productOrderSubject = new Subject<ProductOrder>();
+  private ordersSubject = new Subject<ProductOrders>();
+  private totalSubject = new Subject<number>();
 
   private total: number;
 
@@ -39,7 +39,7 @@ export class EcommerceService {
 
   set SelectedProductOrder(value: ProductOrder) {
     this.productOrder = value;
-    this.productOrderSubject.next();
+    this.productOrderSubject.next(this.productOrder);
   }
 
   get ProductOrders() {
@@ -48,7 +48,7 @@ export class EcommerceService {
 
   set ProductOrders(value: ProductOrders) {
     this.orders = value;
-    this.ordersSubject.next();
+    this.ordersSubject.next(this.orders);
   }
 
   get Total() {
@@ -57,6 +57,6 @@ export class EcommerceService {
 
   set Total(value: number) {
     this.total = value;
-    this.totalSubject.next();
+    this.totalSubject.next(this.total);
   }
 }
