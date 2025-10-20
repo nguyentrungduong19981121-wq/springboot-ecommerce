@@ -37,6 +37,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
     // Filter by category
     List<Product> findByCategoryId(Long categoryId);
     
+    // Count products by category
+    Long countByCategoryId(Long categoryId);
+    
     // Search by name and filter by category
     @Query("SELECT p FROM Product p WHERE LOWER(p.name) LIKE LOWER(CONCAT('%', :name, '%')) AND p.category.id = :categoryId")
     List<Product> searchByNameAndCategoryId(@Param("name") String name, @Param("categoryId") Long categoryId);

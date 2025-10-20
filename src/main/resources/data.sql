@@ -1,19 +1,37 @@
--- Sample data for testing Admin Dashboard and Product Management
+-- Sample data for testing Admin Dashboard, Product Management, and Category Management
 
--- Insert sample categories
-INSERT INTO categories (id, name, description) VALUES
-(1, 'Laptops', 'High-performance laptops and notebooks'),
-(2, 'Smartphones', 'Latest smartphones and mobile devices'),
-(3, 'Tablets', 'Tablets and iPad devices'),
-(4, 'Accessories', 'Phone and laptop accessories');
+-- Insert hierarchical categories
+-- Root categories (no parent)
+INSERT INTO categories (id, name, slug, description, parent_id) VALUES
+(1, 'Electronics', 'electronics', 'All electronic devices and gadgets', NULL),
+(2, 'Accessories', 'accessories', 'Accessories for electronic devices', NULL);
 
--- Insert sample products with new fields
+-- Level 1 categories (children of Electronics)
+INSERT INTO categories (id, name, slug, description, parent_id) VALUES
+(3, 'Laptops', 'laptops', 'High-performance laptops and notebooks', 1),
+(4, 'Smartphones', 'smartphones', 'Latest smartphones and mobile devices', 1),
+(5, 'Tablets', 'tablets', 'Tablets and iPad devices', 1);
+
+-- Level 2 categories (children of Laptops)
+INSERT INTO categories (id, name, slug, description, parent_id) VALUES
+(6, 'Gaming Laptops', 'gaming-laptops', 'High-performance gaming laptops', 3),
+(7, 'Business Laptops', 'business-laptops', 'Professional laptops for business', 3),
+(8, 'Ultrabooks', 'ultrabooks', 'Thin and light ultrabook laptops', 3);
+
+-- Level 1 categories (children of Accessories)
+INSERT INTO categories (id, name, slug, description, parent_id) VALUES
+(9, 'Phone Accessories', 'phone-accessories', 'Cases, chargers, and accessories for phones', 2),
+(10, 'Laptop Accessories', 'laptop-accessories', 'Bags, mice, keyboards for laptops', 2);
+
+-- Insert sample products with hierarchical categories
 INSERT INTO product (id, name, slug, description, price, stock, picture_url, category_id) VALUES
-(1, 'Laptop Dell XPS 13', 'laptop-dell-xps-13', 'Ultra-thin and powerful laptop with 13-inch display, Intel Core i7, 16GB RAM', 30000.0, 10, 'https://example.com/laptop.jpg', 1),
-(2, 'iPhone 13 Pro', 'iphone-13-pro', 'Latest iPhone with A15 Bionic chip, Pro camera system, and Super Retina XDR display', 25000.0, 25, 'https://example.com/iphone.jpg', 2),
-(3, 'Samsung Galaxy S21', 'samsung-galaxy-s21', 'Premium Android smartphone with 5G capability and professional-grade camera', 20000.0, 20, 'https://example.com/samsung.jpg', 2),
-(4, 'MacBook Pro 14', 'macbook-pro-14', 'Apple MacBook Pro with M1 Pro chip, 14-inch Liquid Retina XDR display', 45000.0, 8, 'https://example.com/macbook.jpg', 1),
-(5, 'iPad Air', 'ipad-air', 'Powerful and colorful iPad Air with M1 chip and 10.9-inch display', 15000.0, 15, 'https://example.com/ipad.jpg', 3);
+(1, 'Laptop Dell XPS 13', 'laptop-dell-xps-13', 'Ultra-thin and powerful laptop with 13-inch display, Intel Core i7, 16GB RAM', 30000.0, 10, 'https://example.com/laptop.jpg', 8),
+(2, 'iPhone 13 Pro', 'iphone-13-pro', 'Latest iPhone with A15 Bionic chip, Pro camera system, and Super Retina XDR display', 25000.0, 25, 'https://example.com/iphone.jpg', 4),
+(3, 'Samsung Galaxy S21', 'samsung-galaxy-s21', 'Premium Android smartphone with 5G capability and professional-grade camera', 20000.0, 20, 'https://example.com/samsung.jpg', 4),
+(4, 'MacBook Pro 14', 'macbook-pro-14', 'Apple MacBook Pro with M1 Pro chip, 14-inch Liquid Retina XDR display', 45000.0, 8, 'https://example.com/macbook.jpg', 7),
+(5, 'iPad Air', 'ipad-air', 'Powerful and colorful iPad Air with M1 chip and 10.9-inch display', 15000.0, 15, 'https://example.com/ipad.jpg', 5),
+(6, 'ASUS ROG Strix', 'asus-rog-strix', 'High-performance gaming laptop with RTX 3070, RGB keyboard', 35000.0, 12, 'https://example.com/asus-rog.jpg', 6),
+(7, 'AirPods Pro', 'airpods-pro', 'Active Noise Cancellation wireless earbuds', 5000.0, 50, 'https://example.com/airpods.jpg', 9);
 
 -- Insert sample product images
 INSERT INTO product_images (id, url, product_id) VALUES
