@@ -44,14 +44,23 @@ INSERT INTO product_images (id, url, product_id) VALUES
 (7, 'https://example.com/ipad-blue.jpg', 5),
 (8, 'https://example.com/ipad-pink.jpg', 5);
 
--- Insert sample customers
-INSERT INTO customers (id, name, email, phone, registered_date) VALUES
-(1, 'Nguyen Van A', 'nguyenvana@example.com', '0901234567', '2025-10-01'),
-(2, 'Tran Thi B', 'tranthib@example.com', '0902345678', '2025-10-05'),
-(3, 'Le Van C', 'levanc@example.com', '0903456789', '2025-10-10'),
-(4, 'Pham Thi D', 'phamthid@example.com', '0904567890', '2025-10-15'),
-(5, 'Hoang Van E', 'hoangvane@example.com', '0905678901', '2025-10-20'),
-(6, 'Vu Thi F', 'vuthif@example.com', '0906789012', '2025-10-20');
+-- Insert sample customers (password for all: "password123")
+-- BCrypt hash: $2a$10$N9qo8uLOickgx2ZMRZoMye6J8YLYjPzQdBqKZk0whE6tpMKmQ9Cqu
+INSERT INTO customers (id, name, email, password_hash, phone, registered_date) VALUES
+(1, 'Nguyen Van A', 'nguyenvana@example.com', '$2a$10$N9qo8uLOickgx2ZMRZoMye6J8YLYjPzQdBqKZk0whE6tpMKmQ9Cqu', '0901234567', '2025-10-01'),
+(2, 'Tran Thi B', 'tranthib@example.com', '$2a$10$N9qo8uLOickgx2ZMRZoMye6J8YLYjPzQdBqKZk0whE6tpMKmQ9Cqu', '0902345678', '2025-10-05'),
+(3, 'Le Van C', 'levanc@example.com', '$2a$10$N9qo8uLOickgx2ZMRZoMye6J8YLYjPzQdBqKZk0whE6tpMKmQ9Cqu', '0903456789', '2025-10-10'),
+(4, 'Pham Thi D', 'phamthid@example.com', '$2a$10$N9qo8uLOickgx2ZMRZoMye6J8YLYjPzQdBqKZk0whE6tpMKmQ9Cqu', '0904567890', '2025-10-15'),
+(5, 'Hoang Van E', 'hoangvane@example.com', '$2a$10$N9qo8uLOickgx2ZMRZoMye6J8YLYjPzQdBqKZk0whE6tpMKmQ9Cqu', '0905678901', '2025-10-20'),
+(6, 'Vu Thi F', 'vuthif@example.com', '$2a$10$N9qo8uLOickgx2ZMRZoMye6J8YLYjPzQdBqKZk0whE6tpMKmQ9Cqu', '0906789012', '2025-10-20');
+
+-- Insert sample addresses
+INSERT INTO addresses (id, street, city, postal_code, country, customer_id) VALUES
+(1, '123 Nguyen Trai', 'Ho Chi Minh', '700000', 'Vietnam', 1),
+(2, '456 Le Loi', 'Ho Chi Minh', '700000', 'Vietnam', 1),
+(3, '789 Tran Hung Dao', 'Hanoi', '100000', 'Vietnam', 2),
+(4, '321 Ly Thuong Kiet', 'Da Nang', '550000', 'Vietnam', 3),
+(5, '654 Hai Ba Trung', 'Hanoi', '100000', 'Vietnam', 4);
 
 -- Insert sample orders
 INSERT INTO orders (id, date_created, status) VALUES
