@@ -59,6 +59,9 @@ public class SecurityConfig {
                         .requestMatchers("/api/customers/profile").authenticated()
                         .requestMatchers("/api/customers/addresses").authenticated()
                         
+                        // Order endpoints - require authentication (JWT or Basic Auth)
+                        .requestMatchers("/api/orders/**").authenticated()
+                        
                         .anyRequest().permitAll()
                 )
                 .httpBasic(basic -> {})  // For admin endpoints

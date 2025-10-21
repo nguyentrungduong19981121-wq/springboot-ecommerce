@@ -62,18 +62,18 @@ INSERT INTO addresses (id, street, city, postal_code, country, customer_id) VALU
 (4, '321 Ly Thuong Kiet', 'Da Nang', '550000', 'Vietnam', 3),
 (5, '654 Hai Ba Trung', 'Hanoi', '100000', 'Vietnam', 4);
 
--- Insert sample orders
-INSERT INTO orders (id, date_created, status) VALUES
-(1, '2025-10-01', 'PAID'),
-(2, '2025-10-02', 'PAID'),
-(3, '2025-10-03', 'PAID'),
-(4, '2025-10-05', 'PAID'),
-(5, '2025-10-08', 'PAID'),
-(6, '2025-10-10', 'PAID'),
-(7, '2025-10-12', 'PAID'),
-(8, '2025-10-15', 'PAID'),
-(9, '2025-10-18', 'PAID'),
-(10, '2025-10-20', 'PAID');
+-- Insert sample orders with customer relationship
+INSERT INTO orders (id, customer_id, created_at, status) VALUES
+(1, 1, '2025-10-01 10:30:00', 'PAID'),
+(2, 2, '2025-10-02 14:15:00', 'PAID'),
+(3, 1, '2025-10-03 09:45:00', 'SHIPPED'),
+(4, 3, '2025-10-05 16:20:00', 'PAID'),
+(5, 2, '2025-10-08 11:00:00', 'DELIVERED'),
+(6, 4, '2025-10-10 13:30:00', 'PAID'),
+(7, 1, '2025-10-12 15:45:00', 'SHIPPED'),
+(8, 5, '2025-10-15 10:15:00', 'PAID'),
+(9, 3, '2025-10-18 12:00:00', 'PENDING'),
+(10, 6, '2025-10-20 09:30:00', 'PENDING');
 
 -- Insert sample order products (order_product table)
 -- Order 1: 2 laptops
