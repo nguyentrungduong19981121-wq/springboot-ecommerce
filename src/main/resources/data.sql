@@ -136,3 +136,33 @@ INSERT INTO coupon (id, code, discount_type, discount_value, minimum_order_value
 (3, 'BLACKFRIDAY', 'PERCENTAGE', 20.0, 50000.0, 1000, 0, '2025-11-01 00:00:00', '2025-11-30 23:59:59', true),
 (4, 'NEWYEAR', 'PERCENTAGE', 15.0, NULL, 200, 0, '2026-01-01 00:00:00', '2026-01-31 23:59:59', true),
 (5, 'EXPIRED', 'PERCENTAGE', 50.0, NULL, 10, 10, '2025-01-01 00:00:00', '2025-01-31 23:59:59', false);
+
+-- Insert CMS Pages
+INSERT INTO cms_pages (id, title, slug, content, active, created_at, updated_at) VALUES
+(1, 'About Us', 'about-us', '<h1>About Our E-Commerce Store</h1><p>We are a leading online retailer...</p>', true, NOW(), NOW()),
+(2, 'FAQ', 'faq', '<h1>Frequently Asked Questions</h1><h2>Shipping</h2><p>We ship worldwide...</p>', true, NOW(), NOW()),
+(3, 'Privacy Policy', 'privacy-policy', '<h1>Privacy Policy</h1><p>Your privacy is important to us...</p>', true, NOW(), NOW()),
+(4, 'Terms of Service', 'terms-of-service', '<h1>Terms of Service</h1><p>By using our service, you agree...</p>', true, NOW(), NOW());
+
+-- Insert Shipping Methods
+INSERT INTO shipping_method (id, name, base_cost, per_km_cost, description, active) VALUES
+(1, 'Standard Shipping', 30000.0, 5000.0, 'Delivery in 5-7 business days', true),
+(2, 'Express Shipping', 50000.0, 8000.0, 'Delivery in 2-3 business days', true),
+(3, 'Same Day Delivery', 100000.0, 15000.0, 'Delivery within 24 hours', true),
+(4, 'Free Shipping', 0.0, 0.0, 'Free shipping for orders over $200,000', true);
+
+-- Insert Roles
+INSERT INTO roles (id, name, description) VALUES
+(1, 'ADMIN', 'Administrator with full access'),
+(2, 'STAFF', 'Staff member with limited access'),
+(3, 'MANAGER', 'Manager with most access');
+
+-- Insert Sample Users
+INSERT INTO users (id, username, password_hash, email, full_name, active, created_at) VALUES
+(1, 'admin', '$2a$10$N9qo8uLOickgx2ZMRZoMye6J8YLYjPzQdBqKZk0whE6tpMKmQ9Cqu', 'admin@ecommerce.com', 'System Admin', true, NOW()),
+(2, 'staff1', '$2a$10$N9qo8uLOickgx2ZMRZoMye6J8YLYjPzQdBqKZk0whE6tpMKmQ9Cqu', 'staff@ecommerce.com', 'Staff Member', true, NOW());
+
+-- Assign roles to users
+INSERT INTO user_roles (user_id, role_id) VALUES
+(1, 1), -- admin has ADMIN role
+(2, 2); -- staff1 has STAFF role

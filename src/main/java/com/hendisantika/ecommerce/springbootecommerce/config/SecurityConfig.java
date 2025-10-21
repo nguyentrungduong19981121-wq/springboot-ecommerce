@@ -60,13 +60,38 @@ public class SecurityConfig {
                         .requestMatchers("/api/customers/addresses").authenticated()
                         
                         // Order endpoints - require authentication (JWT or Basic Auth)
+                        .requestMatchers("/api/orders/**").authenticated()
                         
                         // Inventory endpoints - require ADMIN role
                         .requestMatchers("/api/inventory/**").hasRole("ADMIN")
                         
                         // Checkout endpoints - require JWT authentication
                         .requestMatchers("/api/checkout/**").authenticated()
-                        .requestMatchers("/api/orders/**").authenticated()
+                        
+                        // Marketing endpoints - require ADMIN role
+                        .requestMatchers("/api/marketing/**").hasRole("ADMIN")
+                        
+                        // CMS - public read, ADMIN write
+                        .requestMatchers("/api/cms/pages/{slug}").permitAll()
+                        .requestMatchers("/api/cms/**").hasRole("ADMIN")
+                        
+                        // Shipping - public read active, ADMIN write
+                        .requestMatchers("/api/shipping/methods/active").permitAll()
+                        .requestMatchers("/api/shipping/**").hasRole("ADMIN")
+                        
+                        // Payment endpoints - require authentication
+                        .requestMatchers("/api/payments/**").authenticated()
+                        
+                        // Report endpoints - require ADMIN role
+                        .requestMatchers("/api/reports/**").hasRole("ADMIN")
+                        
+                        // Notification endpoints - require authentication
+                        .requestMatchers("/api/notifications/**").authenticated()
+                        
+                        // User management - register/login public, rest authenticated
+                        .requestMatchers("/api/users/register").permitAll()
+                        .requestMatchers("/api/users/login").permitAll()
+                        .requestMatchers("/api/users/**").authenticated()
                         
                         .anyRequest().permitAll()
                 )
