@@ -60,6 +60,12 @@ public class SecurityConfig {
                         .requestMatchers("/api/customers/addresses").authenticated()
                         
                         // Order endpoints - require authentication (JWT or Basic Auth)
+                        
+                        // Inventory endpoints - require ADMIN role
+                        .requestMatchers("/api/inventory/**").hasRole("ADMIN")
+                        
+                        // Checkout endpoints - require JWT authentication
+                        .requestMatchers("/api/checkout/**").authenticated()
                         .requestMatchers("/api/orders/**").authenticated()
                         
                         .anyRequest().permitAll()

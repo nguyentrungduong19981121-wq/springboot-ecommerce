@@ -128,3 +128,11 @@ INSERT INTO order_product (order_id, product_id, quantity) VALUES (10, 1, 1);
 -- iPad: 6 units (Orders: 3, 6, 9)
 -- Samsung: 3 units (Orders: 3, 8)
 -- MacBook: 2 units (Orders: 4, 9)
+
+-- Insert sample coupons
+INSERT INTO coupon (id, code, discount_type, discount_value, minimum_order_value, max_usage_count, current_usage_count, valid_from, valid_until, active) VALUES
+(1, 'WELCOME10', 'PERCENTAGE', 10.0, 10000.0, 100, 0, '2025-10-01 00:00:00', '2025-12-31 23:59:59', true),
+(2, 'SAVE50K', 'FIXED_AMOUNT', 50000.0, 200000.0, 50, 0, '2025-10-01 00:00:00', '2025-12-31 23:59:59', true),
+(3, 'BLACKFRIDAY', 'PERCENTAGE', 20.0, 50000.0, 1000, 0, '2025-11-01 00:00:00', '2025-11-30 23:59:59', true),
+(4, 'NEWYEAR', 'PERCENTAGE', 15.0, NULL, 200, 0, '2026-01-01 00:00:00', '2026-01-31 23:59:59', true),
+(5, 'EXPIRED', 'PERCENTAGE', 50.0, NULL, 10, 10, '2025-01-01 00:00:00', '2025-01-31 23:59:59', false);
