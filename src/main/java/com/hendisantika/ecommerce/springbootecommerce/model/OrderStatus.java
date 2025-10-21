@@ -10,8 +10,9 @@ package com.hendisantika.ecommerce.springbootecommerce.model;
  * Time: 06:05
  */
 public enum OrderStatus {
-    PAID,
-    UNPAID,
-    FAILED,
-    CANCEL
+    PENDING,    // Order created, awaiting payment
+    PAID,       // Payment received
+    SHIPPED,    // Order shipped to customer
+    DELIVERED,  // Order delivered
+    CANCELLED   // Order cancelled
 }

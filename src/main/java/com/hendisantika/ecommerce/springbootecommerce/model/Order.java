@@ -3,16 +3,21 @@ package com.hendisantika.ecommerce.springbootecommerce.model;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import jakarta.persistence.Transient;
 import jakarta.validation.Valid;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,24 +39,33 @@ public class Order {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JsonFormat(pattern = "dd/MM/yyyy")
-    private LocalDate dateCreated;
+    @ManyToOne
+    @JoinColumn(name = "customer_id", nullable = false)
+    private Customer customer;
 
-    private String status;
+    @JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
+    private LocalDateTime createdAt;
 
-    @OneToMany(mappedBy = "pk.order")
+    @Enumerated(EnumType.STRING)
+    private OrderStatus status;
+
+    @OneToMany(mappedBy = "pk.order", cascade = CascadeType.ALL)
     @Valid
     private List<OrderProduct> orderProducts = new ArrayList<>();
 
     @Transient
-    public Double getTotalOrderPrice() {
+    public Double getTotalPrice() {
         double sum = 0D;
         List<OrderProduct> orderProducts = getOrderProducts();
         for (OrderProduct op : orderProducts) {
             sum += op.getTotalPrice();
         }
-
         return sum;
+    }
+
+    @Transient
+    public Double getTotalOrderPrice() {
+        return getTotalPrice();
     }
 
     public Long getId() {
@@ -62,20 +76,39 @@ public class Order {
         this.id = id;
     }
 
-    public LocalDate getDateCreated() {
-        return dateCreated;
+    public Customer getCustomer() {
+        return customer;
     }
 
-    public void setDateCreated(LocalDate dateCreated) {
-        this.dateCreated = dateCreated;
+    public void setCustomer(Customer customer) {
+        this.customer = customer;
     }
 
-    public String getStatus() {
+    public LocalDateTime getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(LocalDateTime createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public OrderStatus getStatus() {
         return status;
     }
 
-    public void setStatus(String status) {
+    public void setStatus(OrderStatus status) {
         this.status = status;
+    }
+
+    // Legacy getter for backwards compatibility
+    public java.time.LocalDate getDateCreated() {
+        return createdAt != null ? createdAt.toLocalDate() : null;
+    }
+
+    public void setDateCreated(java.time.LocalDate dateCreated) {
+        if (dateCreated != null) {
+            this.createdAt = dateCreated.atStartOfDay();
+        }
     }
 
     public List<OrderProduct> getOrderProducts() {
@@ -90,5 +123,4 @@ public class Order {
     public int getNumberOfProducts() {
         return this.orderProducts.size();
     }
-
 }
